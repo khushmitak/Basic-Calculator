@@ -1,10 +1,24 @@
 #Step 1: Get the user inputs for two numbers and operations.
-number1 = float(input("Please enter a number: "))
-number2 = float(input("Please enter another number: "))
+#Step 1a: check for valid input for number1 and number2
+number1 = 0
+number2 = 0
+
+def get_valid_numbers(prompt):
+    while True:
+        try:
+            number = float(input(prompt))
+            return number
+        except ValueError:
+            print("Error: Please enter the valid floating-point numbers. ")
+
+number1 = get_valid_numbers("Please enter a number: ")
+number2 = get_valid_numbers("Please enter another number: ")
+
+#Step 2: Get the user input for operation
 print("Please enter the operation you would like to perform")
 operation = input("such as: +, -, *, /: ")
     
-#Step 2: Check if the operation entered by the user is valid or not
+#Step 3: Check if the operation entered by the user is valid or not
 def is_valid_operation(operation):
     valid_operators = ['+', '-', '*', '/']
     
@@ -13,15 +27,10 @@ def is_valid_operation(operation):
     else:
         return False
 
-#Step 3: Print if the operation is valid or invalid
-if is_valid_operation(operation):
-    print("The operation is valid! ")
-else: 
-    print("Invalid operation. Please try again. ")
-
 #Step 4: If an invalid operation, keep asking the user to input an operation till we get a valid input 
 #use a while loop to do so .
 while not is_valid_operation(operation):
+    print("Invalid operation. Please try again. ")
     print("Please enter the operation you would like to perform")
     operation = input("such as: +, -, *, /: ")  
 
@@ -39,6 +48,7 @@ def perform_operation(number1, number2, operation):
             result = number1 / number2
         except ZeroDivisionError as e:
             print("Error: Cannot divide by zero. ")
+            exit()
             
     return result
 
